@@ -34,6 +34,7 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements XListView.IXListViewListener{
     private XListView mXListView;
+    private int page=1;
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements XListView.IXListV
 
             mXListView.stopRefresh();
             mXListView.stopLoadMore();
-            mXListView.setRefreshTime("刚刚");
+            mXListView.setRefreshTime("刚才");
+
 
             mXListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements XListView.IXListV
 
     @Override
     public void onRefresh() {
-
+        page=1;
         list.clear();
         loadData();
 
@@ -166,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements XListView.IXListV
 
     @Override
     public void onLoadMore() {
+        page++;
         loadData();
     }
 }
